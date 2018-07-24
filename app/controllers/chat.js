@@ -10,5 +10,11 @@ module.exports.iniciaChat = function(app, req, res){
     if(erros) {
         res.render('index', {validacao : erros});
     }
-    res.render('chat');
+
+    app.get('io').emit(
+        'msg',
+        {apelido: dadosForm.apelido, mensagem: ' entrou no chat'}
+    );
+    
+    res.render('chat', {dadosForm: dadosForm});
 }
